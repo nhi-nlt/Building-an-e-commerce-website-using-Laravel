@@ -112,7 +112,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-12">
                                     <label for="{{ route('admin.post-add')}}">Product ID</label>
-                                    <input type="text" class="form-control" name="id" placeholder="Product ID..." value="{{old('id')?? $productDetail->id}}">
+                                    <input type="text" class="form-control" name="product_id" placeholder="Product ID..." value="{{old('id')?? $productDetail->product_id}}">
                                     @error('id')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
@@ -135,7 +135,11 @@
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <label for="">Category</label>
-                                    <input type="text" class="form-control" name="category" placeholder="Category..."  value="{{old('category')?? $productDetail->category}}">
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        @foreach ($categoriesList as $category)
+                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                        @endforeach
+                                    </select>                                   
                                     @error('category')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
@@ -219,6 +223,7 @@
                 $('#img_path').attr("style", "display:none");
             }
        });
+        $('select option[value={{$productDetail->id}}]').attr("selected",true);
       </script>
     
 </body>

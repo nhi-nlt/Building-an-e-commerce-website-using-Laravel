@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
@@ -13,20 +13,20 @@ use App\Http\Controllers\BlogController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [CategoriesController::class, 'index'])->name('home');
-Route::get('/contact', [CategoriesController::class, 'showContact'])->name('contact');
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/contact', [ProductController::class, 'showContact'])->name('contact');
 Route::get('/blog', [BlogController::class, 'showAllBlogForUser'])->name('blog');
-Route::get('/products', [CategoriesController::class, 'showProductList'])->name('products');
-Route::get('/products/{category}', [CategoriesController::class, 'searchProducts'])->name('search-products');
+Route::get('/products', [ProductController::class, 'showProductList'])->name('products');
+Route::get('/products/{category}', [ProductController::class, 'searchProducts'])->name('search-products');
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('', [CategoriesController::class, 'admin'])->name('index');
-    Route::get('/add', [CategoriesController::class, 'showAddForm'])->name('add');
-    Route::post('/add', [CategoriesController::class, 'postAdd'])->name('post-add');
-    Route::get('/edit/{id}', [CategoriesController::class, 'getEdit'])->name('edit');
-    Route::post('/update', [CategoriesController::class, 'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}', [CategoriesController::class, 'delete'])->name('delete');
+    Route::get('', [ProductController::class, 'admin'])->name('index');
+    Route::get('/add', [ProductController::class, 'showAddForm'])->name('add');
+    Route::post('/add', [ProductController::class, 'postAdd'])->name('post-add');
+    Route::get('/edit/{id}', [ProductController::class, 'getEdit'])->name('edit');
+    Route::post('/update', [ProductController::class, 'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
     Route::prefix('blog')->name('blog.')->group(function(){
         Route::get('/', [BlogController::class, 'showAllBlog'])->name('index');
         Route::get('/add', [BlogController::class, 'showAddForm'])->name('add');

@@ -115,10 +115,10 @@
                                         <tbody>
                                             @foreach ($productsList as $product)
                                                 <tr>
-                                                    <td>{{ $product->id }}</td>
+                                                    <td>{{ $product->product_id }}</td>
                                                     <td>{{ $product->name }}</td>
                                                     <td>{{ $product->description }}</td>
-                                                    <td>{{ $product->category }}</td>
+                                                    <td>{{ $product->category_name }}</td>
                                                     <td>{{ $product->quantity }}</td>
                                                     <td>{{ $product->price }}</td>
                                                     <td> <img src="images/{{ $product->img_path }}" alt="{{ $product->name }}"></td>
@@ -126,12 +126,12 @@
                                                     <td>{{ $product->updated_at}}</td>
                                                     <td>
                                                         <div class="button-group">
-                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.edit', ['id'=>$product->id]) }}'">
+                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.edit', ['id'=>$product->product_id]) }}'">
                                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </button>
                                                             <!-- Button trigger modal -->
                                                             {{-- <li><a onclick="return confirm('Are you sure?')" href="{{ route('admin.delete', ['id'=>$product->id]) }}" class="btn btn-danger"><i class="fa fa-times"></i></a></li> --}}
-                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id}}">
+                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $product->product_id }}">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </button>
                                                                 

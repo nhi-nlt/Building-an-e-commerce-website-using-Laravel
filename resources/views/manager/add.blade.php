@@ -135,8 +135,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 col-12">
-                                    <label for="">Category</label>
-                                    <input type="text" class="form-control" name="category" placeholder="Category..."  value="{{old('category')}}">
+                                    <label for="category_id">Category</label>
+                                    {{-- <input type="text" class="form-control" name="category_id" placeholder="Category..."  value="{{old('category_id')}}"> --}}
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        @foreach ($categoriesList as $category)
+                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                        @endforeach
+                                      </select>
                                     @error('category')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
