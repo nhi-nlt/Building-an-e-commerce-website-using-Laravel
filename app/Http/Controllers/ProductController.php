@@ -30,6 +30,12 @@ class ProductController extends Controller
         ->with (compact('ipadList'))
         ->with(compact('blogList'));
     }
+    public function loginForUser(){
+        return view('user.loginUser');
+    }
+    public function loginForAdmin(){
+        return view('manager.loginAdmin');
+    }
     public function showProductList () {
         $products = new Product();
         $productsList = $products->getAllProduct();

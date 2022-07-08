@@ -5,7 +5,7 @@
 <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Home </title>
+        <title>Home</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,13 +33,11 @@
 		<!-- Main Style CSS -->
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" href="../css/responsive.css">
-
+		<link rel="stylesheet" href="../css/customer.css">
     </head>
     <body>
-				
 		<!-- Header Area -->
 		<div class="header-area">
-
 			<!-- Header Top -->
 			<div class="header-top">
 				<div class="container">
@@ -80,14 +78,14 @@
 														<li><a href="#">VND</a></li>
 													</ul>
 												</li>
-												{{-- <li><a class="account" href="#">Account<i class="fa fa-angle-down"></i></a>
-													<ul>
-														<li><a href="my-account.html">My Account</a></li>
+												<li><a class="account" href="{{ route('login') }}">Account<i class="fa fa-angle-down"></i></a>
+													<!-- <ul>
 														<li><a href="wishlist.html">My Wishlist</a></li>
 														<li><a href="cart.html">My Cart</a></li>
 														<li><a href="checkout.html">Checkout</a></li>
-													</ul>
-												</li> --}}
+														<li><a href="my-account.html">Log Out</a></li>
+													</ul> -->
+												</li> 
 											</ul>
 										</div>
 									</div><!-- End Header Link Area -->

@@ -13,12 +13,12 @@ class Product extends Model
     protected $table = 'products';
     public function getAllProduct () 
     {
-        $products =DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id ORDER BY created_at DESC');
+        $products =DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.category_id ORDER BY created_at DESC');
         return $products;
     }
     public function getProductByCategory ($category) 
     {
-        $products =DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id WHERE category_name = ? ORDER BY id DESC', [$category]);
+        $products =DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.category_id WHERE category_name = ? ORDER BY products.category_id DESC', [$category]);
         return $products;
     }
    
@@ -27,7 +27,7 @@ class Product extends Model
         DB::insert('INSERT INTO products (id, name, category_id, description, price, quantity, img_path, created_at) values (?,?, ?, ?, ?, ?, ?, ?)', $data); 
     }
     public function getDetail ($id) {
-        return DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id WHERE product_id = ?', [$id]);
+        return DB::select('SELECT * FROM products INNER JOIN categories ON products.category_id = categories.category_id WHERE product_id = ?', [$id]);
     }
     public function updateProduct ($data, $id) {
         $data[] = $id;

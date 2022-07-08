@@ -13,7 +13,9 @@ use App\Http\Controllers\BlogController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/login', [ProductController::class, 'loginForUser'])->name('login');
 Route::get('/contact', [ProductController::class, 'showContact'])->name('contact');
 Route::get('/blog', [BlogController::class, 'showAllBlogForUser'])->name('blog');
 Route::get('/products', [ProductController::class, 'showProductList'])->name('products');
