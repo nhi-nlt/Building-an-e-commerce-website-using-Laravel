@@ -23,6 +23,7 @@ Route::get('/products/{category}', [ProductController::class, 'searchProducts'])
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/login', [ProductController::class, 'loginForAdmin'])->name('login');
     Route::get('', [ProductController::class, 'admin'])->name('index');
     Route::get('/add', [ProductController::class, 'showAddForm'])->name('add');
     Route::post('/add', [ProductController::class, 'postAdd'])->name('post-add');

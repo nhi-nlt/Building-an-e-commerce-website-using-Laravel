@@ -5,6 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tiny.cloud/1/9u9qsw5fkrkunglozunm78davpot4bysjklzdd49sd2tuynh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <title>Ecommerce Administration</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"rel="stylesheet">
     <link href="{{ asset('css/admin/customer.css') }}" rel="stylesheet">
@@ -197,5 +199,15 @@
     <script src="{{ asset('js/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/ecom-dashboard.js') }}"></script>
     <script src="{{ asset('js/deleteconfirm.js') }}"> </script>
+    <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });
+  </script>
 </body>
 </html>

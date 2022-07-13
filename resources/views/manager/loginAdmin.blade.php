@@ -32,7 +32,7 @@
 		<!-- Main Style CSS -->
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" href="../css/responsive.css">
-		<link rel="stylesheet" href="../css/login.css">
+		<link rel="stylesheet" href="../css/admin/loginAdmin.css">
     </head>
     <body>
         <div class="login-box">
