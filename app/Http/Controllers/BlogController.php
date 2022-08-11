@@ -23,34 +23,35 @@ class BlogController extends Controller
     public function showAddForm () {
         return view('manager.addBlog');
     }
+    
     public function postAdd (Request $request) {
         $blogs = new blog();
         $request->validate([
-            'id'=>'required||unique:blogs',
+            'blog_code'=>'required||unique:blogs',
             'title' => ' required',
             'content' => 'required',
             'author'=>'required',
-            'link'=>'required'
+            
             
         ], [
-            'id.required' => 'ID can not blank',
-            'id.unique' => 'ID is available',
-            'title.required' => 'Title can not blank',
-            'content.required' => 'Content can not blank',
-            'author.required' => 'Author can not blank',
-            'link.required' => 'Link can not blank'
+            'blog_code.required' => 'ID cannot be blank',
+            'blog_code.unique' => 'ID is available',
+            'title.required' => 'Title cannot be blank',
+            'content.required' => 'Content cannot be blank',
+            'author.required' => 'Author cannot be blank',
+            
         ]);
         $dateInsert = [
-            $request->id,
+            $request->blog_code,
             $request->title,
             $request->content,
             $request->author,
-            $request->link,
+            
             date("Y-m-d H:i:s")
         ];
        
         $blogsList = $blogs->addBlog($dateInsert);
-        return redirect()->route('admin.blog.index')->with('msg', 'Add successful');
+        return redirect()->route('admin.blog.index')->with('msg', 'Added successfully');
     }
     public function getEdit (Request $request, $id=0) {
         $blogs = new blog();
@@ -82,10 +83,10 @@ class BlogController extends Controller
             
         ], [
             'id.required'=>'id can not blank',
-            'title.required' => 'Title can not blank',
-            'content.required' => 'Content can not blank',
-            'author.required' => 'Author can not blank',
-            'link.required' => 'Link can not blank'
+            'title.required' => 'Title cannot be blank',
+            'content.required' => 'Content cannot be blank',
+            'author.required' => 'Author cannot be blank',
+            'link.required' => 'Link cannot be blank'
         ]);
         $dataUpdate = [
             $request->id,
@@ -96,7 +97,7 @@ class BlogController extends Controller
             date("Y-m-d H:i:s")
         ];
         $blogs->updateBlog($dataUpdate, $id);
-        return back()->with('msg','Update Success');
+        return back()->with('msg','Updated successfully');
     }
     public function delete ($id=0) {
         $blogs = new blog();

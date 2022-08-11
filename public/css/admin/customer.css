@@ -1,3 +1,6 @@
+label{
+    margin-top: 10px;
+}
 thead > tr > th {
     text-align: center;
     line-height: 32px;
@@ -17,6 +20,9 @@ tbody > tr > td > .button-group > .btn{
 }
 tbody > tr > td > .button-group > button {
     padding: 4px;
+}
+.product-table td:nth-child(6), .product-table td:nth-child(8) {
+	text-align: right;
 }
 .panel{
     font-family: 'Raleway', sans-serif;
@@ -137,7 +143,24 @@ tbody > tr > td > .button-group > button {
 .breadcrumb > li > i{
     padding: 0 5px;;
 }
-
+.img-input{
+    width: 220px;
+}
+.sidebar-nav ul li a.active {
+    font-weight: 500;
+    color: #fb9678 !important;
+}
+/* CSS for Select  */
+#category_id{
+    appearance: auto;
+}
+#filename{
+    width: calc(100% - 81px);
+}
+#file-name{
+    width: calc(100% - 81px);
+}
 .footer{
     margin-left: 0px;
+    margin-top: 25px;
 }

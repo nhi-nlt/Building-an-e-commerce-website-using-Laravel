@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Mirrored from eliteadmin.themedesigner.in/demos/bt4/ecommerce/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Apr 2022 02:20:36 GMT -->
 <head>
     <meta charset="utf-8">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon icon -->
-    <!-- <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png"> -->
+    <script src="https://cdn.tiny.cloud/1/9u9qsw5fkrkunglozunm78davpot4bysjklzdd49sd2tuynh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <title>Ecommerce Administration</title>
-    <!-- chartist CSS -->
-    <!-- <link href="css/morris.css" rel="stylesheet"> -->
-    <!-- <link href="css/ecommerce.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"rel="stylesheet">
     <link href="{{ asset('css/admin/customer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
@@ -26,18 +23,9 @@
                     <!-- <a class="navbar-brand" href="index.html"><img src="img/logoApple2.png" alt="logo" class="light-logo2"></a> -->
                     
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                   
                     <ul class="navbar-nav me-auto">
-                        <!-- Logo -->
-                        <a class="navbar-brand" href="{{ route('admin.blog.index') }}"><img src="{{ asset('images/logoApple2.png') }}" alt="logo" class="light-logo2"></a>
-                    
+                        <a class="navbar-brand" href="{{ route('admin.category.index') }}"><img src="{{ asset('images/logoApple2.png') }}" alt="logo" class="light-logo2"></a>
                         <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars" aria-hidden="true"></i></a> </li>
                         <li class="nav-item">
@@ -49,9 +37,6 @@
                 </div>
             </nav>
         </header>
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav"> 
@@ -64,30 +49,21 @@
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
                         </li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
+                            <a class="has-arrow waves-effect waves-dark active" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
                         </li>
                         <li class="nav-small-cap"><b>--- BLOG</b></li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark active" href="{{ route('admin.blog.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Manage</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Manage</span></a>
                         </li>
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Blog</span></a>
                         </li>
                     </ul>
                 </nav> 
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-
         <div class="page-wrapper">
             <div class="container-fluid">
-                <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h4 class="text-themecolor">Dashboard</h4>
@@ -95,25 +71,25 @@
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home </a></li>
                                 <li><i class="fa fa-chevron-right"></i></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active"> Dashboard</li>
                             </ol>
-                            <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
                     </div>
                 </div>
+    
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-offset-1 blogs-table-area">
-                        @if (session('msg'))
-                            <div class="alert alert-success">{{session('msg')}}</div>
-                        @endif
+                        <div class="col-md-offset-1 ">
+                            @if (session('msg'))
+                                <div class="alert alert-success">{{session('msg')}}</div>
+                            @endif
                             <div class="panel">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-sm-12 col-xs-12">
-                                            <a href="{{ route('admin.blog.add') }}" class="btn btn-sm btn-primary pull-left"><i class="fa fa-plus-circle"></i> Add New</a>
+                                            <a href="{{ route('admin.category.add') }}" class="btn btn-sm btn-primary pull-left"><i class="fa fa-plus-circle"></i> Add New</a>
                                             <form class="form-horizontal pull-right">
                                                 <div class="form-group">
                                                     <label>Show : </label>
@@ -130,41 +106,37 @@
                                 </div>
                                 <div class="panel-body table-responsive">
                                     <table class="table">
+                                        <colgroup>
+                                            <col style="with:10px">
+                                        </colgroup>
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Thumbnail</th>
-                                                {{-- <th>Blog Code</th> --}}
-                                                <th>Title</th>
-                                                <th>Author</th>
-                                                <th>Summary</th>
-                                                
-                                                <!-- <th>Create</th>
-                                                <th>Update</th> -->
+                                                <th>Category Code</th>
+                                                <th>Category Name</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($blogList as $blog)
+                                            @foreach ($categoriesList as $categories)
                                                 <tr>
-                                                    <td>{{$blog ->id}}</td>
-                                                    <td>{{$blog ->img_path}}</td>
-                                                    {{-- <td>{{$blog ->blog_code}}</td> --}}
-                                                    <td>{{$blog ->title}}</td>
-                                                    <td>{{$blog ->author}}</td>
-                                                    <td>{{$blog ->summary}}</td>
-                                                    
-                                                    <!-- <td>{{$blog ->created_at}}</td>
-                                                    <td>{{$blog ->updated_at}}</td> -->
+                                                    <td>{{ $categories->Roll_No}}</td>
+                                                    <td>{{ $categories->category_id }}</td>
+                                                    <td>{{ $categories->category_name }}</td>
+                                                    <td>{{ $categories->category_description }}</td>
+                                          
                                                     <td>
                                                         <div class="button-group">
-                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.blog.edit', ['id'=>$blog->id]) }}'">
+                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.edit', ['id'=>$categories->category_id]) }}'">
                                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </button>
                                                             <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $blog->id}}">
+                                                            {{-- <li><a onclick="return confirm('Are you sure?')" href="{{ route('admin.delete', ['id'=>$categories->category_id]) }}" class="btn btn-danger"><i class="fa fa-times"></i></a></li> --}}
+                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $categories->category_id }}">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </button>
+                                                                
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
@@ -205,33 +177,19 @@
                                                 <li><a href="#">5</a></li>
                                                 <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                                             </ul>
-                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
-                <!-- End Bread crumb and right sidebar toggle -->   
             </div>
-            <!-- End Container fluid  -->
         </div>
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Footer -->
-        <!-- ============================================================== -->
-        
-        <!-- End footer -->
     </div>
     <footer class="footer">
         <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admin by Loi & Nhi
     </footer>
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }} "></script>
@@ -240,14 +198,7 @@
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/ecom-dashboard.js') }}"></script>
-    <script>
-        $(".delete").on("click", function(){
-            var _ID = $(this).attr('id');
-            $(".confirm").attr('id', _ID);
-            $(".confirm").on('click', function(){
-                window.location.href = 'blog/delete/'+_ID;
-            });
-        });
-    </script>
+    <script src="{{ asset('js/deleteconfirm.js') }}"> </script>
+    
 </body>
 </html>

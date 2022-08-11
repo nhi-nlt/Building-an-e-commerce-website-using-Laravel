@@ -11,177 +11,132 @@ use  Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use App\Models\blog;
 use App\Http\Controllers\View;
+use App\Models\Category;
 
 class CategoriesController extends Controller
 {   
     public function __construct () {
     }
-    public function index () {
-        $products = new Product();
-        $blogs = new blog();
-        $blogList = $blogs->getAllBlog();
-        $iphoneList = $products->getProductByCategory('iphone');
-        $macList = $products->getProductByCategory('mac');
-        $ipadList = $products->getProductByCategory('ipad');
-        return view('user.index')
-        ->with (compact('iphoneList'))
-        ->with(compact('macList'))
-        ->with (compact('ipadList'))
-        ->with(compact('blogList'));
-    }
-    public function showProductList () {
-        $products = new Product();
-        $productsList = $products->getAllProduct();
-        return view ('user.productList', compact('productsList'));
-    }
-
-    public function searchProducts ($category) {
-        $products = new Product();
-        $productsList = $products->getProductByCategory($category);
-        return view ('user.search', compact('productsList', 'category'));
-    }
-    public function showContact () {
-        return view('user.contact');
-    }
-    public function admin () {
-        $products = new Product();
-        $productsList = $products->getAllProduct();
-        return view ('manager.product', compact('productsList'));
-    }
+   
     public function showAddForm () {
-        return view('manager.add');
+        $categories = new Category();
+        $categoriesList = $categories->getAllCategories();
+        return view('manager.add', compact('categoriesList'));
+    }
+    public function showCategories() {
+        $categories = new Category();
+        $categoriesList = $categories->getAllCategories();
+        return view('manager.categories', compact('categoriesList'));
+    }
+    public function showAddCategoryForm () {
+        return view('manager.addCategory');
     }
     public function postAdd (Request $request) {
-        $products = new Product();
+        $categories = new Category();
         $request->validate([
-            'id'=>'required||unique:products',
-            'name' => ' required ||unique:products',
-            'price' => 'required',
-            'description' =>'required',
-            'img_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category' => 'required',
-            'quantity' => 'required'
+            'category_id'=>'required||unique:categories',
+            'category_name' => ' required',
+            'category_description' => 'required',
+            
         ], [
-            'id.required' => 'ID can not blank',
-            'id.unique' => 'ID is available',
-            'name.required' => 'Name can not blank',
-            'name.unique' => 'Product is available',
-            'price.required' => 'Price can not blank',
-            'description.required' => 'Description can not blank',
-            'category.required' => 'Category can not blank',
-            'quantity.required' => 'Quantity can not blank',
-            'img_path.required' => 'Choose The Images, Please'
+            'category_id.required' => 'Category ID cannot be blank',
+            'category_id.unique' => 'Category ID is available',
+            'category_name.required' => 'Category Name cannot be blank',
+            'category_description.required' => 'Category Description cannot be blank',
+            
         ]);
-        $file= $request->img_path;
-        $filename= $file->getClientOriginalName();
-        $file-> move(public_path('images'), $filename);
         $dateInsert = [
-            $request->id,
-            $request->name,
-            $request->category,
-            $request->description,
-            $request->price,
-            $request->quantity,
-            $filename,
+            $request->category_id,
+            $request->category_name,
+            $request->category_description,
+            
             date("Y-m-d H:i:s")
         ];
-        $productsList = $products->addProduct($dateInsert);
-        return redirect()->route('admin.index')->with('msg', 'Add successful');
+       
+        $categoriesList = $categories->addCategory($dateInsert);
+        return redirect()->route('admin.category.index')->with('msg', 'Added successfully');
     }
+    // public function getEdit (Request $request, $id=0) {
+    //     $categories = new Category();
+    //     $categoriesList = $categories->getAllCategories();
+    //     $products = new Product();
+    //     if (!empty($id)){
+    //         $productDetail = $products->getDetail($id);
+    //         if (!empty($productDetail[0])){
+    //             $request->session()->put('id', $id);
+    //             $productDetail = $productDetail[0];
+    //             // dd($productDetail);  
+    //         }else{
+    //             return redirect()->route('admin.index')->with('msg','The Product is not available');
+    //         }
+    //     }else{
+    //         return redirect()->route('admin.index')->with('msg','The connection is not available');
+    //     }
+    //     return view('manager.edit', compact('productDetail', 'categoriesList'));
+    // }
     public function getEdit (Request $request, $id=0) {
-        $products = new Product();
+        $categories = new Category();
         if (!empty($id)){
-            $productDetail = $products->getDetail($id);
-            if (!empty($productDetail[0])){
+            $categoryDetail = $categories->getDetail($id);
+            if (!empty($categoryDetail[0])){
                 $request->session()->put('id', $id);
-                $productDetail = $productDetail[0];
-                // dd($productDetail);  
+                $categoryDetail = $categoryDetail[0];
             }else{
-                return redirect()->route('admin.index')->with('msg','The Product is not available');
+                return redirect()->route('admin.category.index')->with('msg','The category is not available');
             }
         }else{
-            return redirect()->route('admin.index')->with('msg','The connection is not available');
+            return redirect()->route('admin.category.index')->with('msg','The connection is not available');
         }
-        return view('manager.edit', compact('productDetail'));
+        return view('manager.editCategory', compact('categoryDetail'));
     }
     public function postEdit (Request $request, $id=0) {
-        $products = new Product();
+        $blogs = new blog();
         $id = session('id');
-        $productDetail = $products->getDetail($id);
         if (empty($id)){
             return back()->with('msg','The connection is not available');
         }
         $request->validate([
-            'id' =>[
-                ' required',
-                Rule::unique('products')->ignore($id)
-            ],
-            'name' =>[
-                ' required',
-                Rule::unique('products')->ignore($id)
-            ],
-            'price' => 'required',
-            'description' =>'required',
-            // 'img_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category' => 'required',
-            'quantity' => 'required'
+            'id'=>'required',
+            'title' => ' required',
+            'content' => 'required',
+            'author'=>'required',
+            'link'=>'required'
+            
         ], [
-            'id.required'=>'ID can not blank',
-            'id.unique'=>'ID  is available',
-            'name.required' => 'Name can not blank',
-            'name.unique' => 'Product is available',
-            'price.required' => 'Price can not blank',
-            'description.required' => 'Description can not blank',
-            'category.required' => 'Category can not blank',
-            'quantity.required' => 'Quantity can not blank',
-            // 'img_path.required' => 'Choose The Images, Please'
+            'id.required'=>'id can not blank',
+            'title.required' => 'Title cannot be blank',
+            'content.required' => 'Content cannot be blank',
+            'author.required' => 'Author cannot be blank',
+            'link.required' => 'Link cannot be blank'
         ]);
-        $tempFile = $request->filename;
-        $file= $request->img_path;
-        $oldFile = $productDetail[0]->img_path;
-        if(empty($file)){
-            $filename = $tempFile;
-        }else{
-            if(File::exists("images/$oldFile")){
-                File::delete("images/$oldFile");
-            }
-            $filename= $file->getClientOriginalName();
-            $file-> move(public_path('images'), $filename);
-        }
         $dataUpdate = [
             $request->id,
-            $request->name,
-            $request->category,
-            $request->description,
-            $request->price,
-            $request->quantity,
-            $filename,
+            $request->title,
+            $request->content,
+            $request->author,
+            $request->link,
             date("Y-m-d H:i:s")
         ];
-        $products->updateProduct($dataUpdate, $id);
-        return back()->with('msg','Update Success');
+        $blogs->updateBlog($dataUpdate, $id);
+        return back()->with('msg','Updated successfully');
     }
     public function delete ($id=0) {
-        $products = new Product();
-        $productDetail = $products->getDetail($id);
+        $blogs = new blog();
         if (!empty($id)){
-            $productDetail = $products->getDetail($id);
-            if (!empty($productDetail[0])){
-                $path = $productDetail[0]->img_path;
-                File::delete("images/$path");
-                $deleteStatus = $products->deleteProduct($id);
+            $blogDetail = $blogs->getDetail($id);
+            if (!empty($blogDetail[0])){
+                $deleteStatus = $blogs->deleteBlog($id);
                 if ($deleteStatus) {
                     $msg = 'Deleted Successful';
                 }else {
                     $msg = 'Error';
                 }
             }else{
-                $msg = 'The Product is not available';
+                $msg = 'The Blog is not available';
             }
         }else{
            $msg = 'The connection is not available';
         }
-        return redirect()->route('admin.index')->with('msg',$msg);
+        return redirect()->route('admin.blog.index')->with('msg',$msg);
     }
-   
 }

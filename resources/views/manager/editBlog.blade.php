@@ -18,7 +18,22 @@
     <link href="{{ asset('css/admin/customer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-    
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/9u9qsw5fkrkunglozunm78davpot4bysjklzdd49sd2tuynh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+    </script>
 </head>
 
 <body class="skin-default fixed-layout">
@@ -65,13 +80,22 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav"> 
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap"><b>--- PRODUCTS</b></li>
+                    <li class="nav-small-cap"><b>--- PRODUCTS</b></li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Data Tables</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">All Products</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
                         </li>
                         <li class="nav-small-cap"><b>--- BLOG</b></li>
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Manage</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Blog</span></a>
                         </li>
                     </ul>
                 </nav> 
@@ -110,21 +134,12 @@
                     <form action="{{ route('admin.blog.post-edit') }}" method="POST">
                         <div class="row">
                             <div class="col-lg-6 col-12">
-                                <label for="">ID</label>
-                                <input type="text" class="form-control" name="id" placeholder="Blog ID...." value="{{old('id')?? $blogDetail->id}}">
-                                @error('id')
-                                    <span style="color: red">{{$message}}</span>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6 col-12">
                                 <label for="">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Title...." value="{{old('title')?? $blogDetail->title}}">
                                 @error('name')
                                     <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-6 col-12">
                                 <label for="">Auhtor</label>
                                 <input type="text" class="form-control" name="author" placeholder="Author...."  value="{{old('author')?? $blogDetail->author}}">
@@ -132,20 +147,30 @@
                                     <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <label for="">Thumbnail</label>
+                                <div>
+                                    <input type="text" class="form-control mb-1 img-input" name="img_path" placeholder="File Name..." id="file-name">
+                                    <button type="button" class="btn btn-primary mb-1" id="browse" >Browse</button>
+                                    <input type="file" class="form-control mb-1" name="img_path" id="img_path" style="display: none"><br>
+                                    <img id="preview-image" src="{{ asset('images/no-images.png') }}" alt="preview image" style="max-height: 250px;">
+                                    @error('img_path')
+                                        <span style="color: red">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-12">
                                 <label for="">Content</label>
-                                <input type="textarea" class="form-control" name="content" placeholder="Content...."  value="{{old('content')?? $blogDetail->content}}">
-                                @error('price')
+                                <textarea id="mytextarea" class="form-control" name="content" placeholder="Content..."  value="{{old('content')}}"></textarea>
+                                <!-- <input type="textarea" class="form-control" name="content" placeholder="Content..."  value="{{old('price')}}"> -->
+                                @error('content')
                                     <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-12">
-                                <label for="">URL</label>
-                                <input type="text" class="form-control" name="link" placeholder="url..." value="{{old('link')?? $blogDetail->link}}">
-                            </div>
-                        </div>
+                        
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('admin.blog.index') }}" class="btn btn-warning">Home</a>
                         @csrf
@@ -163,7 +188,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admid by Loi & Nhi
+            <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admin by Loi & Nhi
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

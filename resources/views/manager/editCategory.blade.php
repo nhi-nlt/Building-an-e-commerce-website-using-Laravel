@@ -15,27 +15,10 @@
     <!-- <link href="css/ecommerce.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"rel="stylesheet">
     <link href="{{ asset('css/admin/customer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-    <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/9u9qsw5fkrkunglozunm78davpot4bysjklzdd49sd2tuynh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
-
-    <script>
-      tinymce.init({
-        selector: '#mytextarea',
-        plugins: [
-          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
-          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
-          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
-        ],
-        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
-          'alignleft aligncenter alignright alignjustify | ' +
-          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
-      });
-    </script>
+    
 </head>
 
 <body class="skin-default fixed-layout">
@@ -60,7 +43,7 @@
                 <!-- ============================================================== -->
                 <div class="navbar-collapse">
                     <ul class="navbar-nav me-auto">
-                        <a class="navbar-brand" href="{{ route('admin.index') }}"><img src="{{ asset('images/logoApple2.png') }}" alt="logo" class="light-logo2"></a>
+                        <a class="navbar-brand" href="{{ route('admin.category.index') }}"><img src="{{ asset('images/logoApple2.png') }}" alt="logo" class="light-logo2"></a>
                         <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars" aria-hidden="true"></i></a> </li>
                         <li class="nav-item">
@@ -87,7 +70,7 @@
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">All Products</span></a>
                         </li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark active" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
                         </li>
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
@@ -113,12 +96,12 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Addition Form</h4>
+                        <h4 class="text-themecolor">Edit Form</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home </a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                                 <li><i class="fa fa-chevron-right"></i></li>
                                 <li class="breadcrumb-item active"> Addition</li>
                             </ol>
@@ -133,86 +116,43 @@
                     @if ($errors->any())
                         <div class="alert alert-danger">Error Data Format</div>
                     @endif
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <label for="">Product Code</label>
-                                    <input type="text" class="form-control" name="product_code" placeholder="Product Code..." value="{{old('product_id')}}">
-                                    @error('product_id')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <label for="">Product Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Product Name..." value="{{old('name')}}">
-                                    @error('name')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
+                    <form action="{{ route('admin.blog.post-edit') }}" method="POST">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <label for="">Category Code</label>
+                                <input type="text" class="form-control" name="category_code" placeholder="Category Code..." value="{{old('category_id')?? $categoryDetail->category_id}}">
+                                @error('category_id')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <label for="">Price</label>
-                                    <input type="text" class="form-control" name="price" placeholder="Price..."  value="{{old('price')}}">
-                                    @error('price')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <label for="category_id">Category</label>
-                                    {{-- <input type="text" class="form-control" name="category_id" placeholder="Category..."  value="{{old('category_id')}}"> --}}
-                                    <select class="form-control" id="category_id" name="category_id">
-                                        @foreach ($categoriesList as $category)
-                                            <option value="{{$category->category_id}}">{{$category->category_name}}</option>
-                                        @endforeach
-                                      </select>
-                                    @error('category')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>   
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <label for="">Image</label>
-                                    <div>
-                                        <input type="text" class="form-control mb-1 img-input" name="img_path" placeholder="File Name..." id="filename">
-                                        <button type="button" class="btn btn-primary mb-1" id="browse" >Browse</button>
-                                        <input type="file" class="form-control mb-1" name="img_path" id="img_path" style="display: none"><br>
-                                        <img id="preview-image" src="{{ asset('images/no-images.png') }}" alt="preview image" style="max-height: 250px;">
-                                        @error('img_path')
-                                            <span style="color: red">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <label for="">Quantity</label>
-                                    <input type="text" class="form-control" name="quantity" placeholder="Quantity..."  value="{{old('quantity')}}">
-                                    @error('quantity')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="">Category Name</label>
+                                <input type="text" class="form-control" name="category_name" placeholder="Category Name..."  value="{{old('category_name')?? $categoryDetail->category_name}}">
+                                @error('category_name')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-12">
-                                    <label for="">Desciption</label>
-                                    <textarea id="mytextarea" class="form-control" name="description" placeholder="Description..."  value="{{old('description')}}"></textarea>
-                                    
-                                    <!-- <input type="textarea" class="form-control" name="description" placeholder="Description..."  value="{{old('description')}}"> -->
-                                    @error('description')
-                                        <span style="color: red">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary">Create</button>
-                            <a href="{{ route('admin.index') }}" class="btn btn-warning">Home</a>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-12">
+                                <label for="">Description</label>
+                                <textarea id="mytextarea" class="form-control" name="category_description" placeholder="Description..."  value="{{old('category_description')?? $categoryDetail->category_description}}"></textarea>
+                                <!-- <input type="textarea" class="form-control" name="content" placeholder="Content...."  value="{{old('price')}}"> -->
+                                @error('category_description')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.category.index') }}'">Home</button>
+                        
                         @csrf
                     </form>
                 </div>
             </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -256,26 +196,6 @@
     <!-- <script src="js/morris.min.js"></script> -->
     <!--Custom JavaScript -->
     <script src="{{ asset('js/ecom-dashboard.js') }}"></script>
-    <script type="text/javascript">
-        $('#img_path').change(function(){
-            let reader = new FileReader();
-            reader.onload = (e) => { 
-                $('#preview-image').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]); 
-       });
-        $('#browse').on('click', function(){
-            let display =  $('#img_path').css('display');
-            if(display == 'none')
-            {
-                $('#img_path').attr("style", "display:block");
-            }
-            if(display == 'block')
-            {
-                $('#img_path').attr("style", "display:none");
-            }
-       });
-      </script>
 </body>
 
 

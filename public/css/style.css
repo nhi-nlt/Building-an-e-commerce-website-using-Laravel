@@ -4144,3 +4144,6 @@ width: 100%;}
 .first {
 	padding-bottom: 30px;
 }
+.product-table td:nth-child(5) {
+	text-align: right;
+}

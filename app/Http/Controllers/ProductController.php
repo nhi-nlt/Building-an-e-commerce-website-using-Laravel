@@ -36,6 +36,15 @@ class ProductController extends Controller
     public function loginForAdmin(){
         return view('manager.loginAdmin');
     }
+    public function registerForUser(){
+        return view('user.registerUser');
+    }
+    public function forgotPassword(){
+        return view('user.forgotPassword');
+    }
+    public function showMyCart(){
+        return view('user.myCart');
+    }
     public function showProductList () {
         $products = new Product();
         $productsList = $products->getAllProduct();
@@ -55,11 +64,19 @@ class ProductController extends Controller
         $productsList = $products->getAllProduct();
         return view ('manager.product', compact('productsList'));
     }
+    
     public function showAddForm () {
         $categories = new Category();
         $categoriesList = $categories->getAllCategories();
         return view('manager.add', compact('categoriesList'));
     }
+    
+    public function showCategories() {
+        $categories = new Category();
+        $categoriesList = $categories->getAllCategories();
+        return view('manager.categories', compact('categoriesList'));
+    }
+    
     public function postAdd (Request $request) {
         $products = new Product();
         $request->validate([
@@ -71,14 +88,14 @@ class ProductController extends Controller
             'category_id' => 'required',
             'quantity' => 'required'
         ], [
-            'id.required' => 'ID can not blank',
+            'id.required' => 'ID cannot be blank',
             'id.unique' => 'ID is available',
-            'name.required' => 'Name can not blank',
+            'name.required' => 'Name cannot be blank',
             'name.unique' => 'Product is available',
-            'price.required' => 'Price can not blank',
-            'description.required' => 'Description can not blank',
-            'category_id.required' => 'Category can not blank',
-            'quantity.required' => 'Quantity can not blank',
+            'price.required' => 'Price cannot be blank',
+            'description.required' => 'Description cannot be blank',
+            'category_id.required' => 'Category cannot be blank',
+            'quantity.required' => 'Quantity cannot be blank',
             'img_path.required' => 'Choose The Images, Please'
         ]);
         $file= $request->img_path;
@@ -95,7 +112,7 @@ class ProductController extends Controller
             date("Y-m-d H:i:s")
         ];
         $productsList = $products->addProduct($dateInsert);
-        return redirect()->route('admin.index')->with('msg', 'Add successful');
+        return redirect()->route('admin.index')->with('msg', 'Added successfully');
     }
     public function getEdit (Request $request, $id=0) {
         $categories = new Category();
@@ -137,14 +154,14 @@ class ProductController extends Controller
             'category_id' => 'required',
             'quantity' => 'required'
         ], [
-            'id.required'=>'ID can not blank',
+            'id.required'=>'ID cannot be blank',
             'id.unique'=>'ID  is available',
-            'name.required' => 'Name can not blank',
+            'name.required' => 'Name cannot be blank',
             'name.unique' => 'Product is available',
-            'price.required' => 'Price can not blank',
-            'description.required' => 'Description can not blank',
-            'category_id.required' => 'Category can not blank',
-            'quantity.required' => 'Quantity can not blank',
+            'price.required' => 'Price cannot be blank',
+            'description.required' => 'Description cannot be blank',
+            'category_id.required' => 'Category cannot be blank',
+            'quantity.required' => 'Quantity cannot be blank',
             // 'img_path.required' => 'Choose The Images, Please'
         ]);
         $tempFile = $request->filename;
@@ -170,7 +187,7 @@ class ProductController extends Controller
             date("Y-m-d H:i:s")
         ];
         $products->updateProduct($dataUpdate, $id);
-        return back()->with('msg','Update Success');
+        return back()->with('msg','Updated successfully');
     }
     public function delete ($product_id=0) {
         $products = new Product();
@@ -182,7 +199,7 @@ class ProductController extends Controller
                 File::delete("images/$path");
                 $deleteStatus = $products->deleteProduct($product_id);
                 if ($deleteStatus) {
-                    $msg = 'Deleted Successful';
+                    $msg = 'Deleted Successfully';
                 }else {
                     $msg = 'Error';
                 }

@@ -65,13 +65,22 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav"> 
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap"><b>--- PRODUCTS</b></li>
+                    <li class="nav-small-cap"><b>--- PRODUCTS</b></li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Data Tables</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">All Products</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
                         </li>
                         <li class="nav-small-cap"><b>--- BLOG</b></li>
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Manage</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Blog</span></a>
                         </li>
                     </ul>
                 </nav> 
@@ -192,7 +201,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admid by Loi & Nhi
+            <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admin by Loi & Nhi
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

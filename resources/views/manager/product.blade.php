@@ -15,7 +15,7 @@
     
 </head>
 
-<body class="skin-default fixed-layout">
+<body class="skin-default fixed-layout"">
     <div id="main-wrapper">
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -43,11 +43,20 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap"><b>--- PRODUCTS</b></li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Data Tables</span></a>
+                            <a class="has-arrow waves-effect waves-dark active" href="{{ route('admin.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">All Products</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Product</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.category.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Categories</span></a>
                         </li>
                         <li class="nav-small-cap"><b>--- BLOG</b></li>
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.index') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Manage</span></a>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.blog.add') }}" aria-expanded="false"><i class="fa fa-leaf"></i><span class="hide-menu">Add New Blog</span></a>
                         </li>
                     </ul>
                 </nav> 
@@ -96,44 +105,47 @@
                                     </div>
                                 </div>
                                 <div class="panel-body table-responsive">
-                                    <table class="table">
+                                    <table class="table product-table">
                                         <colgroup>
                                             <col style="with:10px">
                                         </colgroup>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>#</th>
+                                                <th>Image</th>
+                                                <th>Product Code</th>
                                                 <th>Name</th>
-                                                <th>Description</th>
                                                 <th>Category</th>
                                                 <th>Quantity</th>
+                                                <th>Description</th>
                                                 <th>Price</th>
-                                                <th>Image</th>
-                                                <th>Create At</th>
-                                                <th>Update At</th>
+                                                <!-- <th>Create At</th>
+                                                <th>Update At</th> -->
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($productsList as $product)
                                                 <tr>
-                                                    <td>{{ $product->product_id }}</td>
+                                                    <td>{{ $product->id }}</td>
+                                                    <td> <img src="images/{{ $product->img_path }}" alt="{{ $product->name }}"></td>
+                                                    <td>{{ $product->product_code }}</td>
                                                     <td>{{ $product->name }}</td>
-                                                    <td>{{ $product->description }}</td>
                                                     <td>{{ $product->category_name }}</td>
                                                     <td>{{ $product->quantity }}</td>
+                                                    <td>{{ $product->description }}</td>
                                                     <td>{{ $product->price }}</td>
-                                                    <td> <img src="images/{{ $product->img_path }}" alt="{{ $product->name }}"></td>
-                                                    <td>{{ $product->created_at}}</td>
-                                                    <td>{{ $product->updated_at}}</td>
+                                                    
+                                                    <!-- <td>{{ $product->created_at}}</td>
+                                                    <td>{{ $product->updated_at}}</td> -->
                                                     <td>
                                                         <div class="button-group">
-                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.edit', ['id'=>$product->product_id]) }}'">
+                                                            <button type="button" class="btn btn-warning edit" onclick="window.location.href = '{{ route('admin.edit', ['id'=>$product->product_code]) }}'">
                                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </button>
                                                             <!-- Button trigger modal -->
                                                             {{-- <li><a onclick="return confirm('Are you sure?')" href="{{ route('admin.delete', ['id'=>$product->id]) }}" class="btn btn-danger"><i class="fa fa-times"></i></a></li> --}}
-                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $product->product_id }}">
+                                                            <button type="button" class="btn btn-primary delete" data-toggle="modal" data-target="#exampleModal" id="{{ $product->product_code }}">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </button>
                                                                 
@@ -188,7 +200,7 @@
         </div>
     </div>
     <footer class="footer">
-        <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admid by Loi & Nhi
+        <i class="fa fa-copyright" aria-hidden="true"></i> 2022 Admin by Loi & Nhi
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>

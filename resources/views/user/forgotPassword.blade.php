@@ -5,6 +5,7 @@
 <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +33,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" href="../css/responsive.css">
 		<link rel="stylesheet" href="../css/customer.css">
-		<link rel="stylesheet" href="../css/loginUser.css">
+		<link rel="stylesheet" href="../css/registerUser.css">
     </head>
     <body>
 		<!-- Header Area -->
@@ -160,7 +161,7 @@
 							</div>
 							<div class="col-lg-7 order-lg-2">
 								<div class="header-search">
-									<!-- All Categorie -->
+									<!-- All Categories -->
 									<div class="all-categories">
 										<select id="product-categori">
 											<option value="All Categories">All Categories</option>
@@ -188,30 +189,22 @@
 		</div>
 		<!-- End Header Area -->
         
-      	<div class="login-box">
+        <div class="register-box">
             <img src="../images/loginLogo.png" alt="Apple Logo" width="50" height="50">
-            <h2>Login</h2>
-            <form>
-                <div class="user-box">
-					<input type="text" name="" required="">
-					<label>Username</label>
+            <h2>Register</h2>
+            <form method="post" action="post.php"><!--Thêm trang sau khj register thành công-->
+                <div class="notation">
+                    Please enter your username or email address. <br>
+                    You will receive an email message with instructions on how to reset your password.
                 </div>
                 <div class="user-box">
-					<input type="password" name="" required="">
-					<label>Password</label>
-					<a href="#" id="forgotPass">Forgot Password?</a>
+                    <input type="email" name="username" required="">
+                    <label>Enter Your Email Address</label>
                 </div>
-                <a href="#" id="login">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                login
-                </a>
-                <h6>Don't have an account? <a href="#" id="register">Register here</a></h6>
+				<button type="submit" class="btn btn-warning">Continue</button>
             </form>
         </div>
-		
+    
     <!-- Footer Area -->
 		<div class="footer-area">
 			<!-- Footer Top -->
@@ -221,17 +214,18 @@
 						<div class="col-lg-8">
 							<!-- Block Subscribe -->
 							<div class="block-subscribe">
-								<div class="subscribe-title">
-									<div class="icon"><i class="fa fa-envelope-o"></i></div>
-								</div>
+							<div class="subscribe-title">
+								<div class="icon"><i class="fa fa-envelope-o"></i></div>
+							</div>
 								<div class="subscribe-form">
 									<form action="#">
-										<div class="subscribe-input-box">
+										<div class="subscribe-input-box subscribe-action">
 										   <input type="text" title="Sign up for our newsletter" name="email" required="required">
+										   <!-- <button title="Subscribe" type="submit">Subscribe</button> -->
 										</div>
 										<div class="subscribe-action">
-										   <button title="Subscribe" type="submit">Subscribe</button>
-										</div>
+											<button title="Subscribe" type="submit">Subscribe</button>
+										</div> 
 									</form>
 								</div>
 							</div><!-- End Block Subscribe -->
@@ -299,7 +293,7 @@
                             </div>
                             <div class="footer-static-content">
                                 <ul>	
-                                    <li><a href="#">Terms of User</a></li>
+                                    <li><a href="#">Terms of Use</a></li>
                                     <li><a href="#">Payment Methods</a></li>
                                     <li><a href="#">Shipping Guide</a></li>
                                     <li><a href="#">Locations We Ship To</a></li>

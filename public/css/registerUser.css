@@ -6,11 +6,6 @@ body {
     margin:0;
     padding:0;
     font-family: sans-serif;
-    background: linear-gradient(#eceef1, #f0f1f1);
-}
-
-.footer-top{
-    padding-bottom: 0;
 }
 select {
     word-wrap: normal;
@@ -20,9 +15,12 @@ select {
     border: 0.5px solid #f8f8f8;
     background-color: #f4f4f4;
 }
-.login-box {
+.register-box {
     margin-left: auto;
     margin-right: auto;
+    margin-top:30px;
+    margin-bottom:30px;
+    text-align: right;
     /* position: absolute; */
     top: 50%;
     left: 50%;
@@ -34,27 +32,26 @@ select {
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     /* border-radius: 10px; */
 }
-.login-box > img {
+.register-box > img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
 }
-.login-box h2 {
+.register-box h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
     text-align: center;
 }
-.login-box h6 {
+.register-box h6 {
     text-align: center;
     margin-top: 40px
 }
-.login-box .user-box {
+.register-box .user-box {
     position: relative;
 }
-
-.login-box .user-box input {
+.register-box .user-box input {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -65,7 +62,7 @@ select {
     outline: none;
     background: transparent;
 }
-.login-box .user-box label {
+.register-box .user-box label {
     position: absolute;
     top:0;
     left: 0;
@@ -76,15 +73,15 @@ select {
     transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.register-box .user-box input:focus ~ label,
+.register-box .user-box input:valid ~ label {
     top: -20px;
     left: 0;
     color: #03e9f4;
     font-size: 12px;
 }
 
-.login-box form #login {
+.register-box form #login {
     position: relative;
     display: block;
     margin-left: auto;
@@ -101,7 +98,7 @@ select {
     letter-spacing: 4px
 }
 
-.login-box #login:hover {
+.register-box #login:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 25px;
@@ -112,12 +109,12 @@ select {
                 0 0 100px #03e9f4;
 }
 
-.login-box #login span {
+.register-box #login span {
     position: absolute;
     display: block;
 }
 
-.login-box #login span:nth-child(1) {
+.register-box #login span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -135,7 +132,7 @@ select {
     }
 }
 
-.login-box a span:nth-child(2) {
+.register-box a span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -154,7 +151,7 @@ select {
     }
 }
 
-.login-box a span:nth-child(3) {
+.register-box a span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -173,7 +170,7 @@ select {
     }
 }
 
-.login-box a span:nth-child(4) {
+.register-box a span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -189,5 +186,40 @@ select {
     }
     50%,100% {
         bottom: 100%;
+    }
+}
+.register-box .buttonGroup{
+    text-align: center;
+}
+.register-box button {
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin: 15px;
+    width: 110px;
+}
+.footer-top{
+    padding-bottom: 0;
+}
+.subscribe-input-box input{
+ width: 200px;
+}
+subscribe-action{
+    display: float;
+}
+.btn-warning{
+    background-color: #03e9f4;
+}
+.btn-reset{
+    background-color: #D7D7D7;
+    border: 1px solid #000;
+}
+@media (max-width: 767px){
+    .subscribe-input-box input {
+        width: 190px;
+        margin-top: 5px;
+    }
+    .subscribe-action button {
+        margin-top: 5px;
+        float: right;
     }
 }
