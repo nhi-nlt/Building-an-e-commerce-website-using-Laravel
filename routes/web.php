@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,9 @@ use App\Http\Controllers\BlogController;
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/login', [ProductController::class, 'loginForUser'])->name('login');
+Route::get('/register', [ProductController::class, 'registerForUser'])->name('register');
+Route::get('/forgotPassword', [ProductController::class, 'forgotPassword'])->name('forgotPassword');
+Route::get('/myCart', [ProductController::class, 'showMyCart'])->name('myCart');
 Route::get('/contact', [ProductController::class, 'showContact'])->name('contact');
 Route::get('/blog', [BlogController::class, 'showAllBlogForUser'])->name('blog');
 Route::get('/products', [ProductController::class, 'showProductList'])->name('products');
@@ -25,6 +29,8 @@ Route::get('/products/{category}', [ProductController::class, 'searchProducts'])
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/login', [ProductController::class, 'loginForAdmin'])->name('login');
     Route::get('', [ProductController::class, 'admin'])->name('index');
+    // Route::get('/categories', [ProductController::class, 'showCategories'])->name('categories');
+    // Route::get('/addCategory', [ProductController::class, 'showAddCategoryForm'])->name('addCategory');
     Route::get('/add', [ProductController::class, 'showAddForm'])->name('add');
     Route::post('/add', [ProductController::class, 'postAdd'])->name('post-add');
     Route::get('/edit/{id}', [ProductController::class, 'getEdit'])->name('edit');
@@ -37,6 +43,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/edit/{id}', [BlogController::class, 'getEdit'])->name('edit');
         Route::post('/update', [BlogController::class, 'postEdit'])->name('post-edit');
         Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('category')->name('category.')->group(function(){
+        // Route::get('/', [ProductController::class, 'showCategories'])->name('categories');
+        Route::get('/', [CategoriesController::class, 'showCategories'])->name('index');
+        Route::get('/add', [CategoriesController::class, 'showAddCategoryForm'])->name('add');
+        Route::post('/add', [CategoriesController::class, 'postAdd'])->name('post-add');
+        // Route::get('/edit/{id}', [CategoriesController::class, 'getEdit'])->name('edit');
+        // Route::post('/update', [CategoriesController::class, 'postEdit'])->name('post-edit');
+        // Route::get('/delete/{id}', [CategoriesController::class, 'delete'])->name('delete');
     });
     
 });
